@@ -1,0 +1,61 @@
+<h1><%= @title %> / <%= @followers.count %>user</h1>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <div>
+        <%= gravatar_for @user %>
+      </div>
+      <div class="profile-info">
+        <h1><%= link_to "#{@user.name}", user_path %></h1>
+        <div>
+          <ul>
+            <li>Address <%= @user.area %></li>
+            <li><%= link_to " Follower #{ @user.followed_count }", followers_user_path %></li>
+            <li><%= link_to " Follow #{ @user.following_count }", followings_user_path %></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <% if logged_in? %>
+      <% if @user == current_user %>
+        <div class="button-panel">
+        <%= link_to "Profile Edit" , edit_user_path(current_user), class: "btn btn-block btn-info", id: "profile-button" %>
+        </div>
+      <% else %>
+      <% end %>
+    <% else %>
+      <div class="button-panel">
+      <%= link_to "Log in" , login_path, class: "btn btn-block btn-info", id: "profile-button" %>
+      </div>
+    <% end %>
+  </aside>
+
+  <div class="col-md-8">
+    <div class="followers">
+      <div class="panel-body">
+        <div class="alt-table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">id</th>
+                <th class="col-xs-3 col-ms-3 col-md-3 col-lg-3">Name</th>
+                <th class="col-xs-2 col-ms-2 col-md-2 col-lg-2">Area</th>
+                <th class="col-xs-6 col-ms-6 col-md-6 col-lg-6">Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @followers.each do |f| %>
+              <tr>
+                <th><span><%= f.id %></span></th>
+                <td><span class="message-body"><%= link_to "#{f.name}", user_path(f.id) %></span></td>
+                <td><span class="message-body"><%= f.area %></span></td>
+                <td><span class="message-body"><%= f.profile %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

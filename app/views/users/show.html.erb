@@ -1,0 +1,42 @@
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <div>
+        <%= gravatar_for @user %>
+      </div>
+      <div class="profile-info">
+        <h1><%= link_to "#{@user.name}", user_path %></h1>
+        <div>
+          <ul>
+            <li>Address <%= @user.area %></li>
+            <li><%= link_to " Follower #{ @user.followed_count }", followers_user_path %></li>
+            <li><%= link_to " Follow #{ @user.following_count }", followings_user_path %></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <% if logged_in? %>
+      <%= render 'follow_form' if logged_in? %>
+      <% if @user == current_user %>
+        <div class="button-panel">
+        <%= link_to "Profile Edit" , edit_user_path(current_user), class: "btn btn-block btn btn-primary", id: "profile-button" %>
+        </div>
+      <% else %>
+      <% end %>
+    <% else %>
+      <div class="button-panel">
+      <%= link_to "Log in" , login_path, class: "btn btn-block btn-info", id: "profile-button" %>
+      </div>
+    <% end %>
+  </aside>
+
+  <div class="col-md-8">
+    <% if @user.microposts.any? %>
+      <h3>My Micropost (<%= @user.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+    <% end %>
+  </div>
+</div>
