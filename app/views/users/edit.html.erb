@@ -1,62 +1,56 @@
-<% @page_title = "プロフィール編集" %>
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.present? %>
-    <div class="alert alert-danger ">
-      <%= alert %>
-      <ul>
-      <% @user.errors.full_messages.each do |full_message| %>
-        <li><%= full_message %></li>
-      <% end %> 
-      </ul>
-    </div>
-  <% end %>
-  <h1><%= @page_title %></h1>
-  <div class="row">
-    <div class="edit-wrapper">
+<% @profile_title = "プロフィール編集" %>
+  <h1 class="edit-title"><%= @profile_title %></h1>
+<div class="row">
+  <div class="edit-wrapper">
+  <div class="col-md-9 col-md-offset-2">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>  
       
-      <form class="form" role="form">
-        <div class="form-group">        
-          <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-            <h4>名前</h4>
-            <%= f.text_field :name, :class => "f?orm-control", placeholder: "山田 太郎" %>
-          </div>
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <label for="microposts_name" class="col-sm-12 control-label">名前</label>
+          <%= f.text_field :name, :class => "form-control", placeholder: "山田　太郎" %>
         </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <label for="microposts_area" class="col-sm-12 control-label">居住地</label>
+          <% options = ["北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州", "沖縄"] %>
+          <%= f.select :area, options, :class => "form-control" %>
+        </div>
+      </div>
 
-        <div class="form-group">
-          <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-            <h4>メールアドレス</h4>
-            <%= email_field :email, :class => "form-control" %>
-          </div>
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <label for="microposts_profile" class="col-sm-12 control-label">自己紹介</label>
+          <%= f.text_area :profile, :class => "form-control", :rows => 6, placeholder: "ここに自己紹介を10文字以上で入力してください" %>
         </div>
+      </div>
 
-        <div class="form-group">
-          <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-            <h4>自己紹介</h4>
-            <%= f.text_area :profile, :class => "form-control", :rows => 6, placeholder: "ここに自己紹介を20文字以上で入力してください" %>
-          </div>
-        </div>
+      <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+      <label for="microposts_email" class="col-sm-12 control-label">メールアドレス</label>
+          <%= f.text_field :email, placeholder: "yamada@sample.com" %>
+      </div>
 
-        <div class="form-group">
-          <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-            <h4>パスワード</h4>
-            <%= f.password_field :password, :class => "form-control"%>
-          </div>
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <label for="microposts_password" class="col-sm-12 control-label">パスワード</label>
+          <%= f.password_field :password, :class => "form-control" %>
         </div>
-
-        <div class="form-group">
-          <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-            <h4>パスワード(確認)</h4>
-            <%= f.password_field :password_confirmation, :class => "form-control" %>
-          </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <label for="microposts_password_confirmation" class="col-sm-12 control-label">パスワード確認</label>
+          <%= f.password_field :password_confirmation, :class => "form-control" %>
         </div>
-
-        <div class="form-group">
-          <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-            <%= f.submit "更新する", :class => "btn btn-primary" %>
-          </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <%= f.submit "更新する", :class => "btn btn-primary" %>
         </div>
-      </form>
+      </div>
     </div>
+    <% end %>
   </div>
-<% end %>
-	
+</div>
