@@ -20,7 +20,7 @@
       <%= render 'follow_form' if logged_in? %>
       <% if @user == current_user %>
         <div class="button-panel">
-        <%= link_to "Profile Edit" , edit_user_path(current_user), class: "btn btn-block btn btn-primary", id: "profile-button" %>
+        <%= link_to "プロフィールの編集" , edit_user_path(current_user), class: "btn btn-block btn btn-primary", id: "profile-button" %>
         </div>
       <% else %>
       <% end %>
